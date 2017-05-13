@@ -107,6 +107,7 @@ var line = d3.svg.line()
     .y(function(d) { return yScale(d.rating); })
     .defined(function(d) { return d.rating; });  // Hiding line value defaults of 0 for missing data
 
+var minY; // Defined later to update yAxis
 var maxY; // Defined later to update yAxis
 
 var svg = d3.select("body").append("svg")
@@ -253,8 +254,9 @@ d3.tsv("acc-data.tsv", function(error, data) {
       .on("click", function(d){ // On click make d.visible
         d.visible = !d.visible; // If array key for this data selection is "visible" = true then make it false, if false then make it true
 
+        minY = findMinY(categories); // Find max Y rating value categories data with "visible"; true
         maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
-        yScale.domain([0,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
+        yScale.domain([minY,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
         svg.select(".y.axis")
           .transition()
           .call(yAxis);
@@ -391,8 +393,9 @@ d3.tsv("acc-data.tsv", function(error, data) {
           .transition()
           .call(xAxis);
 
+    minY = findMinY(categories); // Find max Y rating value categories data with "visible"; true
     maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
-    yScale.domain([0,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
+    yScale.domain([minY,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
 
     svg.select(".y.axis") // Redraw yAxis
       .transition()
@@ -408,15 +411,25 @@ d3.tsv("acc-data.tsv", function(error, data) {
 
 }); // End Data callback function
 
-  function findMaxY(data){  // Define function "findMaxY"
-    var maxYValues = data.map(function(d) {
+  function findMinY(data){  // Define function "findMaxY"
+    var minYValues = data.map(function(d) {
       if (d.visible){
-        return d3.max(d.values, function(value) { // Return max rating value
+        return d3.min(d.values, function(value) { // Return max rating value
           return value.rating; })
       }
     });
-    return d3.max(maxYValues);
+    return d3.min(minYValues);
   }
+
+    function findMaxY(data){  // Define function "findMaxY"
+      var maxYValues = data.map(function(d) {
+        if (d.visible){
+          return d3.max(d.values, function(value) { // Return max rating value
+            return value.rating; })
+        }
+      });
+      return d3.max(maxYValues);
+    }
 
 </script>
 </html>
