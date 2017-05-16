@@ -336,15 +336,15 @@ d3.tsv("acc-data.tsv", function(error, data) {
         .attr("y", function (d, i) { return (legendSpace)+i*(legendSpace); }); // (return (11.25/2 =) 5.625) + i * (5.625) // position tooltips
 
   // Add mouseover events for hover line.
-  d3.select("#mouse-tracker") // select chart plot background rect #mouse-tracker
-  .on("mousemove", mousemove) // on mousemove activate mousemove function defined below
-  .on("mouseout", function() {
-      hoverDate
-          .text(null) // on mouseout remove text for hover date
-
-      d3.select("#hover-line")
-          .style("opacity", 1e-6); // On mouse out making line invisible
-  });
+//  d3.select("#mouse-tracker") // select chart plot background rect #mouse-tracker
+//  .on("mousemove", mousemove) // on mousemove activate mousemove function defined below
+//  .on("mouseout", function() {
+//      hoverDate
+//          .text(null) // on mouseout remove text for hover date
+//
+//      d3.select("#hover-line")
+//          .style("opacity", 1e-6); // On mouse out making line invisible
+//  });
 
   function mousemove() {
       var mouse_x = d3.mouse(this)[0]; // Finding mouse x position on rect
