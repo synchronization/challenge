@@ -239,13 +239,17 @@ d3.tsv("acc-data.tsv", function(error, data) {
       .style("stroke", function(d) { return color(d.name); });
 
   issue.append("text")
-       .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+//  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+//.datum(function(d) { console.log(d); return {id: d.name, value: d.values[d.values.length - 1].rating}; })
+.datum(function(d) { return {name: d.name, value: d.values[25].rating, visible: d.visible}; })
+//       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
        .attr("x", 3)
-       .attr("dy", "0.35em")
+//       .attr("dy", "0.35em")
+       .attr("y", function(d) { return 10 * d.value; })
        .style("font", "10px sans-serif")
 //       .text(function(d) { return d.id; });
-       .text(function(d) { return d.name; });
+//.text(function(d) { return d.name; });
+.text(function(d) { return d.visible ? d.name : null; });
 
   // draw legend
   var legendSpace = 450 / categories.length; // 450/number of issues (ex. 40)
