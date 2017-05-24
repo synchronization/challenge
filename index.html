@@ -86,7 +86,8 @@ var yScale = d3.scale.linear()
     .range([height, 0]);
 
 // 40 Custom DDV colors
-var color = d3.scale.ordinal().range(["#48A36D",  "#56AE7C",  "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
+//var color = d3.scale.ordinal().range(["#48A36D",  "#56AE7C",  "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
+var color = d3.scale.ordinal().range(["#4c0000", "#ffbf40", "#4d9957", "#006dcc", "#88468c", "#ff8080", "#332e1a", "#394d3c", "#80c4ff", "#f200c2", "#ffbfbf", "#ccc299", "#00e699", "#8698b3", "#660044", "#a64200", "#4c4913", "#6cd9c3", "#0d0d33", "#ff80b3", "#593116", "#5c7300", "#698c85", "#434359", "#b22d50", "#cc8f66", "#e5ff80", "#103640", "#341d73", "#e5001f", "#ff8800", "#62d936", "#79daf2", "#9539e6", "#73565a", "#8c5e00", "#003307", "#005580", "#f2bfff"]);
 
 
 var xAxis = d3.svg.axis()
@@ -238,18 +239,18 @@ d3.tsv("acc-data.tsv", function(error, data) {
       .attr("clip-path", "url(#clip)")//use clip path to make irrelevant part invisible
       .style("stroke", function(d) { return color(d.name); });
 
-  issue.append("text")
-//  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-//.datum(function(d) { console.log(d); return {id: d.name, value: d.values[d.values.length - 1].rating}; })
-.datum(function(d) { return {name: d.name, value: d.values[25].rating, visible: d.visible}; })
-//       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-       .attr("x", 3)
-//       .attr("dy", "0.35em")
-       .attr("y", function(d) { return 10 * d.value; })
-       .style("font", "10px sans-serif")
-//       .text(function(d) { return d.id; });
-//.text(function(d) { return d.name; });
-.text(function(d) { return d.visible ? d.name : null; });
+//  issue.append("text")
+////  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+////.datum(function(d) { console.log(d); return {id: d.name, value: d.values[d.values.length - 1].rating}; })
+//.datum(function(d) { return {name: d.name, value: d.values[25].rating, visible: d.visible}; })
+////       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+//       .attr("x", 3)
+////       .attr("dy", "0.35em")
+//       .attr("y", function(d) { return 10 * d.value; })
+//       .style("font", "10px sans-serif")
+////       .text(function(d) { return d.id; });
+////.text(function(d) { return d.name; });
+//.text(function(d) { return d.visible ? d.name : null; });
 
   // draw legend
   var legendSpace = 450 / categories.length; // 450/number of issues (ex. 40)
