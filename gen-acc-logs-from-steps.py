@@ -1,6 +1,6 @@
 import csv
 
-with open('Challenge6.csv', 'rb') as csvfile:
+with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
 
     first = next(csvreader, None)
