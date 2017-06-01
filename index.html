@@ -242,10 +242,10 @@ var contextArea = d3.svg.area() // Set attributes for area chart in brushing con
 .style("stroke", function(d) { /*console.log(d.name);*/ return color(d.name); });
 
 
-	issue.append("text")
-        .attr("x", 300)
-        .attr("y", function(d) {console.log(d.values[20]); return yScale(d.values[25].rating)})
-        .text(function(d) {/*console.log(d);*/ return d.visible ? d.name : null});
+//	issue.append("text")
+//        .attr("x", 300)
+//        .attr("y", function(d) {console.log(d.values[20]); return yScale(d.values[25].rating)})
+//        .text(function(d) {/*console.log(d);*/ return d.visible ? d.name : null});
 
 //  issue.append("text")
 ////  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
@@ -329,11 +329,11 @@ issue.append("rect")
 		})
 
 // Names of people by the check boxes
-//issue.append("text")
-//.attr("x", width + (margin.right/3))
-//.attr("y", function (d, i) { return (legendSpace)+i*(legendSpace); })  // (return (11.25/2 =) 5.625) + i * (5.625)
-//.text(function(d) { return d.name; });
-////      .text(function(d) { return "Text"; });
+issue.append("text")
+.attr("x", width + (margin.right/3))
+.attr("y", function (d, i) { return (legendSpace)+i*(legendSpace); })  // (return (11.25/2 =) 5.625) + i * (5.625)
+.text(function(d) { return d.name; });
+//      .text(function(d) { return "Text"; });
 
 // Hover line
 var hoverLineGroup = svg.append("g")
