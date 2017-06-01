@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 
 with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -24,7 +25,12 @@ with open('Challenge.csv', 'rb') as csvfile:
                 appendee = None
             else:
                 acc_log = acc_log + float(logs[i])
-                appendee = acc_log
+#                appendee = acc_log
+                appendee = np.exp(1.0 * acc_log / (i+1)) * 10000
+
+#            print '----'
+#            print 'i: ', i
+#            print 'appendee: ', appendee
 
             acc_logs.append(appendee)
 
