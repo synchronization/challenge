@@ -6,7 +6,6 @@ with open('Challenge.csv', 'rb') as csvfile:
 
     first = next(csvreader, None)
     dates = first[10:40]
-#    print dates
 
     names = ['date'] # the d3 visualization needs this
     all_acc_logs = []
@@ -25,12 +24,8 @@ with open('Challenge.csv', 'rb') as csvfile:
                 appendee = None
             else:
                 acc_log = acc_log + float(logs[i])
-#                appendee = acc_log
+                # convert accumulated logs to average log steps
                 appendee = np.exp(1.0 * acc_log / (i+1)) * 10000
-
-#            print '----'
-#            print 'i: ', i
-#            print 'appendee: ', appendee
 
             acc_logs.append(appendee)
 

@@ -185,7 +185,7 @@
 
             xScale.domain(d3.extent(data, function(d) {
                 return d.date;
-            })); // extent = highest and lowest points, domain is data, range is bouding box
+            })); // extent = highest and lowest points, domain is data, range is bounding box
 
             yScale.domain([0, 100
                 //d3.max(categories, function(c) { return d3.max(c.values, function(v) { return v.rating; }); })
@@ -265,36 +265,6 @@
                     return color(d.name);
                 });
 
-
-            //	issue.append("text")
-            //        .attr("x", 300)
-            //        .attr("y", function(d) {console.log(d.values[20]); return yScale(d.values[25].rating)})
-            //        .text(function(d) {/*console.log(d);*/ return d.visible ? d.name : null});
-
-//            issue.append("text")
-//                //  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-//                //.datum(function(d) { console.log(d); return {id: d.name, value: d.values[d.values.length - 1].rating}; })
-//                .datum(function(d) {
-//                    //console.log(d.values[d.values.length - 3].rating);
-//                    return {
-//                        name: d.name,
-//                        value: d.values[d.values.length - 3].rating,
-//                        last_date: d.values[d.values.length - 1].date,
-//                        visible: d.visible
-//                    };
-//                })
-//                //.attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-//                //.attr("transform", function(d) { return "translate(" + xScale(d.last_date) + "," + yScale(d.value) + ")"; })
-//                //       .attr("x", 300)
-//                //       .attr("dy", "0.35em")
-//                //       .attr("y", function(d) { return 10 * d.value; })
-//                .style("font", "10px sans-serif")
-//                //       .text(function(d) { return d.id; });
-//                .text(function(d) {
-//                    return "----------";//d.name;
-//                });
-//            //.text(function(d) { return d.visible ? d.name : null; });
-
             // draw legend
             var legendSpace = 450 / categories.length; // 450/number of issues (ex. 40)
 
@@ -326,12 +296,6 @@
                         .attr("d", function(d) {
                             return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
                         })
-
-//                    issue.select("text")
-//                        .transition()
-//                        .text(function(d) {
-//                            return d.visible ? d.name : null; // If d.visible is true then write text for this d selection
-//                        })
 
                     issue.select("rect")
                         .transition()
@@ -412,30 +376,12 @@
                     return (legendSpace) + i * (legendSpace);
                 }); // (return (11.25/2 =) 5.625) + i * (5.625) // position tooltips
 
-            // Add mouseover events for hover line.
-            //  d3.select("#mouse-tracker") // select chart plot background rect #mouse-tracker
-            //  .on("mousemove", mousemove) // on mousemove activate mousemove function defined below
-            //  .on("mouseout", function() {
-            //      hoverDate
-            //          .text(null) // on mouseout remove text for hover date
-            //
-            //      d3.select("#hover-line")
-            //          .style("opacity", 1e-6); // On mouse out making line invisible
-            //  });
-
             function mousemove() {
-                //    console.log("MouseMove");
-
                 var mouse_x = d3.mouse(this)[0]; // Finding mouse x position on rect
                 var graph_x = xScale.invert(mouse_x); //
 
-                //var mouse_y = d3.mouse(this)[1]; // Finding mouse y position on rect
-                //var graph_y = yScale.invert(mouse_y);
-                //console.log(mouse_x);
-
                 var format = d3.time.format('%b %Y'); // Format hover date text to show three letter month and full year
 
-                //      hoverDate.text(format(graph_x)); // scale mouse position to xScale date and format it to show month and year
                 hoverDate.text(graph_x); // scale mouse position to xScale date and format it to show month and year
 
                 d3.select("#hover-line") // select hover-line and changing attributes to mouse position
@@ -456,21 +402,10 @@
                 /*The final line in this segment declares a new array d that is represents the date and close combination that is closest to the cursor. It is using the magic JavaScript short hand for an if statement that is essentially saying if the distance between the mouse cursor and the date and close combination on the left is greater than the distance between the mouse cursor and the date and close combination on the right then d is an array of the date and close on the right of the cursor (d1). Otherwise d is an array of the date and close on the left of the cursor (d0).*/
 
                 //d is now the data row for the date closest to the mouse position
-
-                //      focus.select("text").text(function(columnName){
-                //         //because you didn't explictly set any data on the <text>
-                //         //elements, each one inherits the data from the focus <g>
-                //
-                //         console.log(columnName);
-                //
-                ////         return (d[columnName]);
-                //         return (columnName);
-                //      });
             };
 
             //for brusher of the slider bar at the bottom
             function brushed() {
-
                 xScale.domain(brush.empty() ? xScale2.domain() : brush.extent()); // If brush is empty then reset the Xscale domain to default, if not then make it the brush extent
 
                 svg.select(".x.axis") // replot xAxis with transition when brush used
@@ -490,7 +425,6 @@
                     .attr("d", function(d) {
                         return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
                     });
-
             };
 
         }); // End Data callback function
