@@ -32,10 +32,6 @@ with open('Challenge.csv', 'rb') as csvfile:
 
     all_acc_logs_transpose = zip(*all_acc_logs)
 
-    # remove the possible .s at the end of some names
-#    for i in range(len(names)):
-#        names[i] = names[i].replace('.', '')
-
     with open('acc-data.tsv', 'wb') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter='\t',
                                quotechar='"', quoting=csv.QUOTE_MINIMAL)
