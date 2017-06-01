@@ -329,11 +329,11 @@ issue.append("rect")
 		})
 
 // Names of people by the check boxes
-issue.append("text")
-.attr("x", width + (margin.right/3))
-.attr("y", function (d, i) { return (legendSpace)+i*(legendSpace); })  // (return (11.25/2 =) 5.625) + i * (5.625)
-.text(function(d) { return d.name; });
-//      .text(function(d) { return "Text"; });
+//issue.append("text")
+//.attr("x", width + (margin.right/3))
+//.attr("y", function (d, i) { return (legendSpace)+i*(legendSpace); })  // (return (11.25/2 =) 5.625) + i * (5.625)
+//.text(function(d) { return d.name; });
+////      .text(function(d) { return "Text"; });
 
 // Hover line
 var hoverLineGroup = svg.append("g")
