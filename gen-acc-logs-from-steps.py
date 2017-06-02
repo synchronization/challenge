@@ -23,9 +23,19 @@ with open('Challenge.csv', 'rb') as csvfile:
             if logs[i] == '':
                 appendee = None
             else:
-                acc_log = acc_log + float(logs[i])
+                # convert the strings to float
+                log_values = [float(x) for x in logs[0:i+1]]
+
+                # for the first one we do not have minimum and so we treat it differently
+                if i==0:
+                    acc_log = acc_log + log_values[i]
+                    count_total = 1
+                else:
+                    acc_log = sum(log_values) - min(log_values)
+                    count_total = i
+
                 # convert accumulated logs to average log steps
-                appendee = np.exp(1.0 * acc_log / (i+1)) * 10000
+                appendee = np.exp(1.0 * acc_log / count_total) * 10000.0
 
             acc_logs.append(appendee)
 
