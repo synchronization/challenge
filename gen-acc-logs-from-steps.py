@@ -15,15 +15,25 @@ with open('Challenge.csv', 'rb') as csvfile:
         name = name.replace('.', '')
         names.append(name)
 
-        logs = inputrow[41:]
+        print
+        print 'inputrow: ', inputrow
+        print 'inputrow[41]: ', inputrow[41]
+        print 'inputrow[42]: ', inputrow[42]
+        print 'inputrow[43]: ', inputrow[43]
+        logs = inputrow[42:]
+        print
+        print 'logs: ', logs
 
         acc_logs = []
         acc_log = 0.0
         for i in range(len(logs)):
+            print 'logs[i]: ', logs[i]
             if logs[i] == '':
                 appendee = None
+                #break
             else:
                 # convert the strings to float
+                print 'logs[0:i+1]: ', logs[0:i+1]
                 log_values = [float(x) for x in logs[0:i+1]]
 
                 # for the first one we do not have minimum and so we treat it differently
