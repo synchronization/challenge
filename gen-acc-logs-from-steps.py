@@ -5,7 +5,8 @@ with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
 
     first = next(csvreader, None)
-    dates = first[10:40]
+    dates = first[10:41]
+    print dates
 
     names = ['date'] # the d3 visualization needs this
     all_acc_logs = []
@@ -16,6 +17,8 @@ with open('Challenge.csv', 'rb') as csvfile:
         names.append(name)
 
         logs = inputrow[42:]
+        print
+        print logs
 
         acc_logs = []
         acc_log = 0.0
