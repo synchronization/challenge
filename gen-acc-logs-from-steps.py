@@ -1,11 +1,19 @@
 import csv
 import numpy as np
 
+start_col = 10 # counting from 0
+end_col = 40 # counting from 0
+
 with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
 
     first = next(csvreader, None)
-    dates = first[10:41]
+    print first
+    print
+    print first[0]
+    print
+    dates = first[start_col:end_col+1]
+    print dates
 
     names = ['date'] # the d3 visualization needs this
     all_acc_logs = []
@@ -15,7 +23,7 @@ with open('Challenge.csv', 'rb') as csvfile:
         name = name.replace('.', '')
         names.append(name)
 
-        logs = inputrow[42:]
+        logs = inputrow[end_col+2:]
 
         acc_logs = []
         acc_log = 0.0
