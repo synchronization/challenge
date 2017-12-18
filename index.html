@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Challenge 10</title>
+    <title>Challenge 11</title>
     <style>
         body {
             font: 10px sans-serif;
@@ -245,7 +245,7 @@
                 .attr("x", -10)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Average Log Steps");
+                .text("Average Steps");
 
             var issue = svg.selectAll(".issue")
                 .data(categories) // Select nested data and append to new svg group elements
@@ -259,11 +259,10 @@
                     return "line-" + d.name.replace(" ", "").replace("/", ""); // Give line id of line-(insert issue name, with any spaces replaced with no spaces)
                 })
                 .attr("d", function(d) {
-                    /*console.log(d.visible);*/
                     return d.visible ? line(d.values) : null; // If array key "visible" = true then draw line, if not then don't
                 })
                 .attr("clip-path", "url(#clip)") //use clip path to make irrelevant part invisible
-                .style("stroke", function(d) { /*console.log(d.name);*/
+                .style("stroke", function(d) {
                     return color(d.name);
                 });
 
@@ -283,7 +282,6 @@
                 .attr("class", "legend-box")
 
                 .on("click", function(d) { // On click make d.visible
-                    //console.log('d: ' + d);
                     d.visible = !d.visible; // If array key for this data selection is "visible" = true then make it false, if false then make it true
 
                     minY = findMinY(categories); // Find max Y rating value categories data with "visible"; true
@@ -462,15 +460,12 @@ This is how the challenge works:
 2. Your steps will be transformed by log(#daily_steps / 10000)<br>
 3. We will calculate your “average log steps” and rank participants by that measure (details below)<br>
 4. If your average log steps >= 10000, you are a winner and will automatically get $40 back<br>
-5. Your $10 (and the lost monies) are divided among the winners by their inverse ranks (last winner gets 1 unit, …, 2nd winner gets n-1 units, 1st person gets n units)<br>
+5. Your $10 (and the lost monies) are divided among the winners by their inverse ranks based on the number of steps (last winner gets 1 unit, ..., 2nd winner gets n-1 units, 1st person gets n units)<br>
 6. Didn’t do well one day? (or two days? or three days?) We will always discard your 3 worst days!<br>
 7. Don’t have Fitbit? No problem! Please update us daily of your device steps<br>
 7. Technical difficulties? Please let one of us know ASAP<br>
 8. How well are you doing? Click on your name (and others) in the above chart<br>
 <hr>
-Appendix: How do we calculate “average log steps”?
-average log steps = EXP(SUM(LN(#DAILY_STEPS / 10000)) / (NUMBER_OF_DAYS))*10000
-In which the SUM is calculated over the n-1 best days and NUMBER_OF_DAYS=n-1
 <br>
 We encourage you to make a copy of the spreadsheet and play with the formula to have a better sense of how it works.
 
