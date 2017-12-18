@@ -1,8 +1,8 @@
 import csv
 import numpy as np
 
-start_col = 10 # counting from 0
-end_col = 40 # counting from 0
+start_col = 12 # counting from 0
+end_col = 42 # counting from 0
 
 # ----------------------------
 
