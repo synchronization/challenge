@@ -28,7 +28,6 @@ def make_person_acc_values(inputrow):
     names.append(name)
 
     # read the values from the spreadsheet value (after the column for total)
-    #str_values = inputrow[end_col+2:]
     str_values = inputrow[start_col:end_col+1]
 
     # remove possible comma in each number
