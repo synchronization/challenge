@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import requests
 
 start_col = 12 # counting from 0
 end_col = 42 # counting from 0
@@ -51,6 +52,13 @@ def make_person_acc_values(inputrow):
     return acc_values
 
 # ----------------------------
+
+# download the Google spreadsheet
+sheet_address = 'https://docs.google.com/spreadsheets/d/1joks5CbcIJe5Gd9cYl--TF7Pvg_HqcxoVCxs5cm8vqE/export?format=csv'
+response = requests.get(sheet_address)
+assert response.status_code == 200, 'Wrong status code'
+with open('Challenge.csv', 'w') as csvfile:
+    csvfile.write(response.content)
 
 with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
