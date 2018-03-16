@@ -53,7 +53,6 @@ def make_person_acc_values(inputrow):
 # ----------------------------
 
 # download the Google spreadsheet
-#sheet_address = 'https://docs.google.com/spreadsheets/d/1joks5CbcIJe5Gd9cYl--TF7Pvg_HqcxoVCxs5cm8vqE/export?format=csv'
 sheet_address = 'https://docs.google.com/spreadsheets/d/1l7KWoD1fz-MAboD0PUkA83ahQEj0a67VYv7ndOD5FXE/export?format=csv'
 response = requests.get(sheet_address)
 assert response.status_code == 200, 'Wrong status code'
