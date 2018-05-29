@@ -53,7 +53,7 @@ def make_person_acc_values(inputrow):
 # ----------------------------
 
 # download the Google spreadsheet
-sheet_address = 'https://docs.google.com/spreadsheets/d/1dQ5HatgrHMdz1n6ElGzalWZ9dKfNW8sh-Yn-2TKP9xg/export?format=csv'
+sheet_address = 'https://docs.google.com/spreadsheets/d/18-JtMnuM6Mw_CHxBaJbXQaNu2-pHl-ogoDZljac5GEk/export?format=csv'
 response = requests.get(sheet_address)
 assert response.status_code == 200, 'Wrong status code'
 with open('Challenge.csv', 'w') as csvfile:
