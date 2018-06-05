@@ -53,18 +53,19 @@ def make_person_acc_values(inputrow):
 
 # ----------------------------
 
-## download the Google spreadsheet
-#sheet_address = 'https://docs.google.com/spreadsheets/d/18-JtMnuM6Mw_CHxBaJbXQaNu2-pHl-ogoDZljac5GEk/export?format=csv'
-#response = requests.get(sheet_address)
+# download the Google spreadsheet
+sheet_address = 'https://docs.google.com/spreadsheets/d/18-JtMnuM6Mw_CHxBaJbXQaNu2-pHl-ogoDZljac5GEk/export?format=csv'
+response = requests.get(sheet_address)
 #print '-RDF95134- response: ', response
 #print '-RDF95208- response.status_code: ', response.status_code
-#
-#if (response.status_code == 200):
-#    print 'Wrong status code in reading the spreadsheet: ', response.status_code
-#    sys.exit()
-#    
-#with open('Challenge.csv', 'w') as csvfile:
-#    csvfile.write(response.content)
+#print '-RDT41731- response.text: ', response.text
+
+if (response.status_code != 200):
+    print 'Wrong status code in reading the spreadsheet: ', response.status_code
+    sys.exit()
+    
+with open('Challenge.csv', 'w') as csvfile:
+    csvfile.write(response.content)
 
 with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
