@@ -64,8 +64,8 @@ if (response.status_code != 200):
     print 'Wrong status code in reading the spreadsheet: ', response.status_code
     sys.exit()
     
-with open('Challenge.csv', 'w') as csvfile:
-    csvfile.write(response.content)
+#with open('Challenge.csv', 'w') as csvfile:
+#    csvfile.write(response.content)
 
 with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
