@@ -60,13 +60,14 @@ response = requests.get(sheet_address)
 #print '-RDF95134- response: ', response
 #print '-RDF95208- response.status_code: ', response.status_code
 #print '-RDT41731- response.text: ', response.text
+#print '-RDT112937- response.content: ', response.content
 
 if (response.status_code != 200):
     print 'Wrong status code in reading the spreadsheet: ', response.status_code
     sys.exit()
     
-#with open('Challenge.csv', 'w') as csvfile:
-#    csvfile.write(response.content)
+with open('Challenge.csv', 'w') as csvfile:
+    csvfile.write(response.content)
 
 with open('Challenge.csv', 'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
