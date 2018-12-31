@@ -4,7 +4,7 @@ import requests
 import sys
 
 start_col = 12 # counting from 0
-end_col = 42 # counting from 0
+end_col = 32 # inclusive, counting from 0
 
 # ----------------------------
 
@@ -35,7 +35,7 @@ def make_person_acc_values(inputrow):
     #"10,000.00".replace(",", "")
 
     acc_values = []
-    acc_value = 0.0
+    # acc_value = 0.0
     for i in range(len(str_values)):
         if str_values[i] == '':
             appendee = None
@@ -54,9 +54,7 @@ def make_person_acc_values(inputrow):
 # ----------------------------
 
 # download the Google spreadsheet
-#sheet_address = 'https://docs.google.com/spreadsheets/d/1nUWyMeji2DZr0TnIXPKlQGGJ-siBM9XaotDF1E_NBdE/export?format=csv'
-# sheet_address = 'https://docs.google.com/spreadsheets/d/1M1ybDeETcjvLaXS9pFaa1swaQMoIXB9vupGhZ_0yV2c/export?format=csv'
-sheet_address = 'https://docs.google.com/spreadsheets/d/1FPtoRu6FJS8EGDueLNkLOZzDEDLl1NWOJWpXMjsDDOc/export?format=csv'
+sheet_address = 'https://docs.google.com/spreadsheets/d/1fhV6ktnyih4q9AR55x6d3pQP-LvC-taPC_DYjDmAi8s/export?format=csv'
 
 response = requests.get(sheet_address)
 #print '-RDF95134- response: ', response
