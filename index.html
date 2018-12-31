@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Challenge 19</title>
+    <title>Challenge 20</title>
     <style>
         body {
             font: 10px sans-serif;
@@ -84,7 +84,7 @@
 
         //var parseDate = d3.time.format("%Y%m%d").parse;
         var parseDate = d3.time.format("%m/%d/%Y").parse;
-        var bisectDate = d3.bisector(function(d) {
+        var bisectDate = d3.bisector(function (d) {
             return d.date;
         }).left;
 
@@ -100,7 +100,12 @@
         // 40 Custom DDV colors
         //var color = d3.scale.ordinal().range(["#48A36D",  "#56AE7C",  "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
         // Roozbeh's 40 Custom nice colors
-        var color = d3.scale.ordinal().range(["#4c0000", "#ffbf40", "#4d9957", "#006dcc", "#88468c", "#ff8080", "#332e1a", "#394d3c", "#80c4ff", "#f200c2", "#ffbfbf", "#ccc299", "#00e699", "#8698b3", "#660044", "#a64200", "#4c4913", "#6cd9c3", "#0d0d33", "#ff80b3", "#593116", "#5c7300", "#698c85", "#434359", "#b22d50", "#cc8f66", "#e5ff80", "#103640", "#341d73", "#e5001f", "#ff8800", "#62d936", "#79daf2", "#9539e6", "#73565a", "#8c5e00", "#003307", "#005580", "#f2bfff"]);
+        var color = d3.scale.ordinal().range(["#4c0000", "#ffbf40", "#4d9957", "#006dcc", "#88468c", "#ff8080",
+            "#332e1a", "#394d3c", "#80c4ff", "#f200c2", "#ffbfbf", "#ccc299", "#00e699", "#8698b3", "#660044",
+            "#a64200", "#4c4913", "#6cd9c3", "#0d0d33", "#ff80b3", "#593116", "#5c7300", "#698c85", "#434359",
+            "#b22d50", "#cc8f66", "#e5ff80", "#103640", "#341d73", "#e5001f", "#ff8800", "#62d936", "#79daf2",
+            "#9539e6", "#73565a", "#8c5e00", "#003307", "#005580", "#f2bfff"
+        ]);
 
         var xAxis = d3.svg.axis()
             .scale(xScale)
@@ -118,13 +123,13 @@
 
         var line = d3.svg.line()
             .interpolate("basis")
-            .x(function(d) {
+            .x(function (d) {
                 return xScale(d.date);
             })
-            .y(function(d) {
+            .y(function (d) {
                 return yScale(d.rating);
             })
-            .defined(function(d) {
+            .defined(function (d) {
                 return d.rating;
             }); // Hiding line value defaults of 0 for missing data
 
@@ -162,20 +167,20 @@
 
         //end slider part------------------------------------------------------------
 
-        d3.tsv("acc-data.tsv", function(error, data) {
-            color.domain(d3.keys(data[0]).filter(function(key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
+        d3.tsv("acc-data.tsv", function (error, data) {
+            color.domain(d3.keys(data[0]).filter(function (key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
                 return key !== "date";
             }));
 
-            data.forEach(function(d) { // Make every date in the csv data a javascript date object format
+            data.forEach(function (d) { // Make every date in the csv data a javascript date object format
                 d.date = parseDate(d.date);
             });
 
-            var categories = color.domain().map(function(name) { // Nest the data into an array of objects with new keys
+            var categories = color.domain().map(function (name) { // Nest the data into an array of objects with new keys
 
                 return {
                     name: name, // "name": the csv headers except date
-                    values: data.map(function(d) { // "values": which has an array of the dates and ratings
+                    values: data.map(function (d) { // "values": which has an array of the dates and ratings
                         return {
                             date: d.date,
                             rating: +(d[name]),
@@ -185,7 +190,7 @@
                 };
             });
 
-            xScale.domain(d3.extent(data, function(d) {
+            xScale.domain(d3.extent(data, function (d) {
                 return d.date;
             })); // extent = highest and lowest points, domain is data, range is bounding box
 
@@ -208,7 +213,7 @@
 
             var contextArea = d3.svg.area() // Set attributes for area chart in brushing context graph
                 .interpolate("monotone")
-                .x(function(d) {
+                .x(function (d) {
                     return xScale2(d.date);
                 }) // x is scaled to xScale2
                 .y0(height2) // Bottom line begins at height2 (area chart not inverted)
@@ -255,14 +260,14 @@
             issue.append("path")
                 .attr("class", "line")
                 .style("pointer-events", "none") // Stop line interferring with cursor
-                .attr("id", function(d) {
+                .attr("id", function (d) {
                     return "line-" + d.name.replace(" ", "").replace("/", ""); // Give line id of line-(insert issue name, with any spaces replaced with no spaces)
                 })
-                .attr("d", function(d) {
+                .attr("d", function (d) {
                     return d.visible ? line(d.values) : null; // If array key "visible" = true then draw line, if not then don't
                 })
                 .attr("clip-path", "url(#clip)") //use clip path to make irrelevant part invisible
-                .style("stroke", function(d) {
+                .style("stroke", function (d) {
                     return color(d.name);
                 });
 
@@ -273,15 +278,15 @@
                 .attr("width", 10)
                 .attr("height", 10)
                 .attr("x", width + (margin.right / 3) - 15)
-                .attr("y", function(d, i) {
+                .attr("y", function (d, i) {
                     return (legendSpace) + i * (legendSpace) - 8;
                 }) // spacing
-                .attr("fill", function(d) {
+                .attr("fill", function (d) {
                     return d.visible ? color(d.name) : "#F1F1F2"; // If array key "visible" = true then color rect, if not then make it grey
                 })
                 .attr("class", "legend-box")
 
-                .on("click", function(d) { // On click make d.visible
+                .on("click", function (d) { // On click make d.visible
                     d.visible = !d.visible; // If array key for this data selection is "visible" = true then make it false, if false then make it true
 
                     minY = findMinY(categories); // Find max Y rating value categories data with "visible"; true
@@ -293,21 +298,21 @@
 
                     issue.select("path")
                         .transition()
-                        .attr("d", function(d) {
+                        .attr("d", function (d) {
                             return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
                         })
 
                     issue.select("rect")
                         .transition()
-                        .attr("fill", function(d) {
+                        .attr("fill", function (d) {
                             return d.visible ? color(d.name) : "#F1F1F2";
                         });
                 })
 
-                .on("mouseover", function(d) {
+                .on("mouseover", function (d) {
                     d3.select(this)
                         .transition()
-                        .attr("fill", function(d) {
+                        .attr("fill", function (d) {
                             return color(d.name);
                         });
 
@@ -316,10 +321,10 @@
                         .style("stroke-width", 2.5);
                 })
 
-                .on("mouseout", function(d) {
+                .on("mouseout", function (d) {
                     d3.select(this)
                         .transition()
-                        .attr("fill", function(d) {
+                        .attr("fill", function (d) {
                             return d.visible ? color(d.name) : "#F1F1F2";
                         });
 
@@ -331,10 +336,10 @@
             // Names of people by the check boxes
             issue.append("text")
                 .attr("x", width + (margin.right / 3))
-                .attr("y", function(d, i) {
+                .attr("y", function (d, i) {
                     return (legendSpace) + i * (legendSpace);
                 }) // (return (11.25/2 =) 5.625) + i * (5.625)
-                .text(function(d) {
+                .text(function (d) {
                     return d.name;
                 });
             //      .text(function(d) { return "Text"; });
@@ -372,7 +377,7 @@
                 .attr("class", "tooltip")
                 //        .text("Here")
                 .attr("x", width + 20) // position tooltips
-                .attr("y", function(d, i) {
+                .attr("y", function (d, i) {
                     return (legendSpace) + i * (legendSpace);
                 }); // (return (11.25/2 =) 5.625) + i * (5.625) // position tooltips
 
@@ -418,7 +423,7 @@
 
                 issue.select("path") // Redraw lines based on brush xAxis scale and domain
                     .transition()
-                    .attr("d", function(d) {
+                    .attr("d", function (d) {
                         return d.visible ? line(d.values) : null; // If d.visible is true then draw line for this d selection
                     });
             };
@@ -426,9 +431,9 @@
         }); // End Data callback function
 
         function findMinY(data) { // Define function "findMaxY"
-            var minYValues = data.map(function(d) {
+            var minYValues = data.map(function (d) {
                 if (d.visible) {
-                    return d3.min(d.values, function(value) { // Return max rating value
+                    return d3.min(d.values, function (value) { // Return max rating value
                         return value.rating;
                     })
                 }
@@ -437,9 +442,9 @@
         }
 
         function findMaxY(data) { // Define function "findMaxY"
-            var maxYValues = data.map(function(d) {
+            var maxYValues = data.map(function (d) {
                 if (d.visible) {
-                    return d3.max(d.values, function(value) { // Return max rating value
+                    return d3.max(d.values, function (value) { // Return max rating value
                         return value.rating;
                     })
                 }
@@ -450,21 +455,23 @@
 
     <hr>
 
-This is how the challenge works:
-<br>
-1. You put down $50<br>
-2. We discard your three worst days in the challenge<br>
-3. Your daily score is calculated as log(#daily_steps/goal)<br>
-4. We sum your daily scores to get your total score<br>
-5. You win if your total score is not negative<br>
-6. All winners will get $40 back<br>
-7. The rest of the money ($10 from everyone and $40 from those who lost) will be distributed among the winners proportional to their total number of steps * their goal<br>
-8. Didn’t do well one day? (or two days? or three days?) We discard your 3 worst days!<br>
-9. Don’t have Fitbit? No problem! Please update us daily on your device steps<br>
-10. Technical difficulties? Please let one of us know ASAP<br>
-11. How well are you doing? Click on your name (and others) in the above chart<br>
-<hr>
-<br>
-We encourage you to make a copy of the spreadsheet and play with the formula to have a better sense of how it works.
+    This is how the challenge works:
+    <br>
+    1. You put down $50<br>
+    2. We discard your three worst days in the challenge<br>
+    3. Your daily score is calculated as log(#daily_steps/goal)<br>
+    4. We sum your daily scores to get your total score<br>
+    5. You win if your total score is not negative<br>
+    6. All winners will get $40 back<br>
+    7. The rest of the money ($10 from everyone and $40 from those who lost) will be distributed among the winners
+    proportional to their total number of steps * their goal<br>
+    8. Didn’t do well one day? (or two days? or three days?) We discard your 3 worst days!<br>
+    9. Don’t have Fitbit? No problem! Please update us daily on your device steps<br>
+    10. Technical difficulties? Please let one of us know ASAP<br>
+    11. How well are you doing? Click on your name (and others) in the above chart<br>
+    <hr>
+    <br>
+    We encourage you to make a copy of the spreadsheet and play with the formula to have a better sense of how it
+    works.
 
     </html>
