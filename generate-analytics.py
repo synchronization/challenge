@@ -3,8 +3,8 @@ import numpy as np
 import requests
 import sys
 
-start_col = 12 # counting from 0
-end_col = 32 # inclusive, counting from 0
+start_col = 13 # counting from 0
+end_col = 33 # inclusive, counting from 0
 
 # ----------------------------
 
@@ -54,7 +54,8 @@ def make_person_acc_values(inputrow):
 # ----------------------------
 
 # download the Google spreadsheet
-sheet_address = 'https://docs.google.com/spreadsheets/d/1fhV6ktnyih4q9AR55x6d3pQP-LvC-taPC_DYjDmAi8s/export?format=csv'
+# sheet_address = 'https://docs.google.com/spreadsheets/d/1fhV6ktnyih4q9AR55x6d3pQP-LvC-taPC_DYjDmAi8s/export?format=csv'
+sheet_address = 'https://docs.google.com/spreadsheets/d/131w6E34XGXJS1U0kjUVUjOkWfBuGC5tkjVeSlN9bMPs/export?format=csv'
 
 response = requests.get(sheet_address)
 #print '-RDF95134- response: ', response
