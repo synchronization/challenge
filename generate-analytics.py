@@ -3,8 +3,8 @@ import numpy as np
 import requests
 import sys
 
-start_col = 13 # counting from 0
-end_col = 33 # inclusive, counting from 0
+start_col = 14 # counting from 0
+end_col = 34 # inclusive, counting from 0
 
 # ----------------------------
 
