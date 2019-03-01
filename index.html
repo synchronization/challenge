@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Challenge 21</title>
+    <title>Challenge 22</title>
     <style>
         body {
             font: 10px sans-serif;
@@ -67,11 +67,11 @@
     <script src="https://d3js.org/d3.v3.js"></script>
     <script>
         var margin = {
-                top: 20,
-                right: 200,
-                bottom: 100,
-                left: 50
-            },
+            top: 20,
+            right: 200,
+            bottom: 100,
+            left: 50
+        },
             margin2 = {
                 top: 430,
                 right: 10,
@@ -92,7 +92,7 @@
             .range([0, width]),
 
             xScale2 = d3.time.scale()
-            .range([0, width]); // Duplicate xScale for brushing ref later
+                .range([0, width]); // Duplicate xScale for brushing ref later
 
         var yScale = d3.scale.linear()
             .range([height, 0]);
@@ -111,8 +111,8 @@
             .orient("bottom"),
 
             xAxis2 = d3.svg.axis() // xAxis for brush slider
-            .scale(xScale2)
-            .orient("bottom");
+                .scale(xScale2)
+                .orient("bottom");
 
         var yAxis = d3.svg.axis()
             .scale(yScale)
@@ -463,12 +463,10 @@
     6. All winners will get $50 back<br>
     7. If there is any money left in the bank, it will be distributed among the winners
     proportional to their total number of steps * their goal<br>
-    8. There is a $100 bonus this round (Challenge 21) which will be equally distributed to the winners
-    who have increased their goal by at least 1000 steps<br>
-    9. Didn’t do well one day? (or two days? or three days?) We discard your 3 worst days!<br>
-    10. Don’t have Fitbit? No problem! Please update us daily on your device steps<br>
-    11. Technical difficulties? Please let one of us know ASAP<br>
-    12. How well are you doing? Click on your name (and others) in the above chart<br>
+    8. Didn’t do well one day? (or two days? or three days?) We discard your 3 worst days!<br>
+    9. Don’t have Fitbit? No problem! Please update us daily on your device steps<br>
+    10. Technical difficulties? Please let one of us know ASAP<br>
+    11. How well are you doing? Click on your name (and others) in the above chart<br>
     <hr>
     <br>
     We encourage you to make a copy of the spreadsheet and play with the formula to have a better sense of how it
