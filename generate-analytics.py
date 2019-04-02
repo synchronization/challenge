@@ -55,7 +55,6 @@ def make_person_acc_values(inputrow):
 
 # download the Google spreadsheet
 # sheet_address = 'https://docs.google.com/spreadsheets/d/131w6E34XGXJS1U0kjUVUjOkWfBuGC5tkjVeSlN9bMPs/export?format=csv'
-# sheet_address = 'https://docs.google.com/spreadsheets/d/1kj46uxMOasGFQpNFfC4bxzC02ZJduQy26B-8PaYGVTI/export?format=csv'
 sheet_address = 'https://docs.google.com/spreadsheets/d/1gCw0spx74K6hJqs7oseCqtdcug2gspJhZ6gWfeMusiM/export?format=csv'
 
 response = requests.get(sheet_address)
