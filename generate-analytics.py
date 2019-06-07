@@ -63,10 +63,11 @@ if (response.status_code != 200):
     print('Wrong status code in reading the spreadsheet: ', response.status_code)
     sys.exit()
     
-with open('Challenge.csv', 'w') as csvfile:
+with open('Challenge.csv', 'wb') as csvfile:
     csvfile.write(response.content)
 
-with open('Challenge.csv', 'rb') as csvfile:
+# with open('Challenge.csv', 'rb') as csvfile:
+with open('Challenge.csv', newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
 
     first = next(csvreader, None)
@@ -79,9 +80,11 @@ with open('Challenge.csv', 'rb') as csvfile:
         person_acc_values = make_person_acc_values(inputrow)
         all_acc_values.append(person_acc_values)
 
-    all_acc_values_transpose = zip(*all_acc_values)
+    # all_acc_values_transpose = zip(*all_acc_values)
+    all_acc_values_transpose = list(map(list, zip(*all_acc_values)))
 
-    with open('acc-data.tsv', 'wb') as csvfile:
+    # with open('acc-data.tsv', 'wb') as csvfile:
+    with open('acc-data.tsv', 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter='\t',
                                quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csvwriter.writerow(names)
