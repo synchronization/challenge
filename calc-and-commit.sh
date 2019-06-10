@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "get the steps and calculate the progress"
-python generate-analytics.py
+python3 generate-analytics.py
 
 echo "make the commit message"
 commitmessage="Update the steps on $(date)"
